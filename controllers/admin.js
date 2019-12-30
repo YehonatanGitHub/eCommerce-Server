@@ -1,7 +1,9 @@
 const Product = require('../models/product');
+const Category = require('../models/category');
 
 exports.getAllProducts = (req, res, next) => {
   Product.find()
+    .populate('category')
     .then(products => {
       console.log(products);
       res.send(products);

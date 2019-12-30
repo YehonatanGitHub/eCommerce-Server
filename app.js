@@ -25,8 +25,30 @@ db.once('open', function () {
   // we're connected!
   console.log('connection is open');
 });
+
+
+// const users = require('../eCommerce-Server/models/users');
+
+// const Schema = mongoose.Schema;
+
+
+// const categorySchema = new Schema({
+//   name: { type: String, required: true }
+// });
+
+// var Category = mongoose.model('Category', categorySchema);
+
+// const category2 = new Category({
+//   name: 'Wine & Drinks'
+// });
+
+// category2.save(function (err, category2) {
+//   if (err) return console.error(err);
+//   console.log(category2);
+// });
+
 // var userSchema = new mongoose.Schema({
-//   f_name: { type: String, required: true },
+//   f_name: {  type: String, required: true },
 //   l_name: { type: String, required: true },
 //   u_name: { type: String, required: true },
 //   tz: { type: String, required: true },
@@ -82,8 +104,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRouter);
-app.use('/users', usersRouter);
-
+// app.use('/users', usersRouter);
 app.use('/shop', shopRouter);
 
 // catch 404 and forward to error handler

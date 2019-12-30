@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  // _id: { type: String, required: false },
   proname: { type: String, required: true },
   price: { type: Number, required: true },
   picture: { type: String, required: true },
-  category: { type: String, required: true }
+  category: { type: Schema.Types.ObjectId, ref: "Category", required: true }
 });
 
 // var Product = mongoose.model('Product', productSchema);
