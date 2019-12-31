@@ -6,7 +6,7 @@ exports.addNewUser = (req, res, next) => {
   const f_name = req.body.f_name;
   const l_name = req.body.l_name;
   const email = req.body.email;
-  const id = req.body.id;
+  const tz = req.body.tz;
   const password = req.body.password;
   const city = req.body.city;
   const street = req.body.street;
@@ -15,7 +15,7 @@ exports.addNewUser = (req, res, next) => {
     f_name: f_name,
     l_name: l_name,
     email: email,
-    _id: id,
+    tz: tz,
     password: password,
     role: '5de38cba61bb924c747f3271',
     city: city,
@@ -27,15 +27,35 @@ exports.addNewUser = (req, res, next) => {
     .then(result => {
       console.log(result);
       console.log('Created New User');
-      res.status(200).json({
-        message: 'NEW User Saved'
+      // res.status(200).json({
+      //   message: 'NEW User Saved'
+      // });
+
+      var newCart = new Cart({
+        userId: result._id,
+        creatDate: Date(),
+        closed: false
       });
+      newCart.save()
+        .then(cart => {
+          console.log(cart);
+          console.log('Created New Cart');
+          res.status(200).json({
+            message: 'NEW user and cart created'
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
     })
     .catch(err => {
       console.log(err);
-    });
-};
+    })
 
+
+
+};
 
 
 exports.getCart = (req, res, next) => {
