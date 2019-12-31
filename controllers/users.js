@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const Cart = require('../models/cart');
 
 exports.addNewUser = (req, res, next) => {
   console.log(req.body);
@@ -24,7 +25,7 @@ exports.addNewUser = (req, res, next) => {
   user
     .save()
     .then(result => {
-      // console.log(result);
+      console.log(result);
       console.log('Created New User');
       res.status(200).json({
         message: 'NEW User Saved'
@@ -35,3 +36,16 @@ exports.addNewUser = (req, res, next) => {
     });
 };
 
+
+
+exports.getCart = (req, res, next) => {
+  Cart.find()
+    .populate('userId')
+    .then(cart => {
+      console.log(cart);
+      res.send(cart);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

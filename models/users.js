@@ -6,7 +6,7 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     f_name: { type: String, required: true },
     l_name: { type: String, required: true },
-    _id: { type: Number, required: true },
+    tz: { type: Number, required: true },
     password: { type: String, required: true },
     city: { type: String, required: false },
     street: { type: String, required: false },
@@ -20,11 +20,11 @@ const userSchema = new Schema({
 //     f_name: 'admin',
 //     l_name: 'admin',
 //     email: 'admin@admin.com',
-//     _id: '123456789',
+//     tz: '123456789',
 //     password: 'admin',
-// role: '5de38cba61bb924c747f3271'  //customer
+//     role: '5de3894a38512832c47e4670'
 // });
-// console.log(admin);
+
 
 // admin.save(function (err, admin) {
 //     if (err) return console.error(err);

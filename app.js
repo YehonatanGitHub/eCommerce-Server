@@ -27,7 +27,7 @@ db.once('open', function () {
 });
 
 
-// const users = require('../eCommerce-Server/models/users');
+const cart = require('../eCommerce-Server/models/cart');
 
 // const Schema = mongoose.Schema;
 
@@ -104,7 +104,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/shop', shopRouter);
 
 // catch 404 and forward to error handler
