@@ -4,23 +4,25 @@ const Schema = mongoose.Schema;
 
 const cartItemSchema = new Schema({
   product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
-  creatDate: { type: Date, required: true },
-  closed: { type: Boolean, required: true }
+  cart: { type: Schema.Types.ObjectId, ref: "Cart", required: true },
+  qty: { type: Number, required: true },
+  total_cost: { type: Number, required: true }
 });
 
-// const Cart = mongoose.model('Cart', cartSchema);
+// const cartItem = mongoose.model('cartItem', cartItemSchema);
 
 // const date1 = Date()
 
-// const testCart = new Cart({
-//   userId: '5e0b1a9b674bda50b063ec0c',
-//   creatDate: date1,
-//   closed: true
+// const newCartItem = new cartItem({
+//   product: '5e0b1b100424b44b50b5c5e5',
+//   cart: '5e0a1fe8fda1975c88f295c0',
+//   qty: 2,
+//   total_cost: 4
 // });
 
-// testCart.save(function (err, testCart) {
+// newCartItem.save(function (err, newCartItem) {
 //   if (err) return console.error(err);
-//   console.log(testCart);
+//   console.log(newCartItem);
 // });
 
-module.exports = mongoose.model('Cart', cartSchema);
+module.exports = mongoose.model('CartItem', cartItemSchema);
