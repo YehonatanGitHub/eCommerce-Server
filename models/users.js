@@ -3,16 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    email: { type: String, required: true },
-    f_name: { type: String, required: true },
-    l_name: { type: String, required: true },
+    email: { type: String, required: false },
+    f_name: { type: String, required: false },
+    l_name: { type: String, required: false },
     tz: { type: Number, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: false },
     city: { type: String, required: false },
     street: { type: String, required: false },
-    role: { type: Schema.Types.ObjectId, ref: "Role", required: true }
+    role: { type: Schema.Types.ObjectId, ref: "Role", required: false }
 });
-
 
 // var User = mongoose.model('User', userSchema);
 

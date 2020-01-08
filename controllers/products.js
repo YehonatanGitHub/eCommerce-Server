@@ -1,7 +1,14 @@
 const Product = require('../models/product');
 
 exports.getAllProducts = (req, res, next) => {
-  res.send('products get all');
+  Product.find()
+    .populate('category')
+    .then(products => {
+      console.log(products);
+      res.send(products);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
-
 
