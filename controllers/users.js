@@ -77,13 +77,14 @@ exports.addNewUser = (req, res, next) => {
         .then(cart => {
           console.log(cart);
           console.log('Created New Cart');
-
           const payload = {
-            email: user.email,
-            userId: user._id.toString()
+            f_name: user.f_name,
+            l_name: user.l_name,
+            city: user.city,
+            street: user.street
           };
-          const token = jwt.sign({ payload }, 'thisIsTheSecretKey', { expiresIn: '1h' });
-          res.status(200).json({ token: token, role: user.role });
+          const token = jwt.sign(payload, 'thisIsTheSecretKey', { expiresIn: '1h' });
+          res.status(200).json({ token });
 
           // res.status(200).json({
           //   message: 'NEW user and cart created'
@@ -125,11 +126,13 @@ exports.login = (req, res, next) => {
         res.status(401).send('Password incorrect');
       } else {
         const payload = {
-          email: user.email,
-          userId: user._id.toString()
+          f_name: user.f_name,
+          l_name: user.l_name,
+          city: user.city,
+          street: user.street
         };
-        const token = jwt.sign({ payload }, 'thisIsTheSecretKey', { expiresIn: '1h' });
-        res.status(200).json({ token: token, role: user.role });
+        const token = jwt.sign(payload, 'thisIsTheSecretKey', { expiresIn: '1h' });
+        res.status(200).json({ token });
 
         // res.status(200).send(user);
       }
