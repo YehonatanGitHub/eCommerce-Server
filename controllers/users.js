@@ -129,9 +129,11 @@ exports.login = (req, res, next) => {
           f_name: user.f_name,
           l_name: user.l_name,
           city: user.city,
-          street: user.street
+          street: user.street,
+          role: user.role,
+          userId: user._id
         };
-        const token = jwt.sign(payload, 'thisIsTheSecretKey', { expiresIn: '1h' });
+        const token = jwt.sign(payload, 'thisIsTheSecretKey');
         res.status(200).json({ token });
 
         // res.status(200).send(user);

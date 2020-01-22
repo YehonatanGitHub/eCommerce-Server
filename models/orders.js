@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-  use: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  cart: { type: Schema.Types.ObjectId, ref: "Cart", required: true },
+  use: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  cart: { type: Schema.Types.ObjectId, ref: 'Cart', required: true },
   total_cost_order: { type: Number, required: true },
   city_deliver: { type: String, required: true },
   street_deliver: { type: String, required: true },
@@ -14,7 +14,6 @@ const orderSchema = new Schema({
 });
 
 // const Order = mongoose.model('Order', orderSchema);
-
 
 // const date1 = Date()
 
@@ -34,4 +33,4 @@ const orderSchema = new Schema({
 //   console.log(newOrder);
 // });
 
-module.exports = mongoose.model('CartItem', orderSchema);
+module.exports = mongoose.model('Order', orderSchema);
