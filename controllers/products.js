@@ -16,13 +16,13 @@ exports.getAllProducts = (req, res, next) => {
 exports.addToCart = (req, res, next) => {
   console.log(req.body);
   const productId = req.body.productId;
-  const userId = req.body.userId;
+  const cartId = req.body.cartId;
   const qty = req.body.qty;
   const cost = req.body.cost;
 
   const newCartItem = new CartItem({
     product: productId,
-    cart: userId,
+    cart: cartId,
     qty: qty,
     total_cost: cost
   });
@@ -40,3 +40,50 @@ exports.addToCart = (req, res, next) => {
       console.log(err);
     });
 };
+
+exports.getCart = (req, res, next) => {
+  console.log('req cart call');
+  console.log(req.body);
+  CartItem.find({ cart: req.body.id })
+    .populate('product')
+    .then(products => {
+      console.log(products);
+      res.send(products);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.delFromCart = (req, res, next) => {
+  console.log('delFromCart');
+  console.log(req.body);
+
+  CartItem.deleteOne({ _id: req.body.id })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.delAllFromCart = (req, res, next) => {
+  console.log('delAllFromCart');
+
+  CartItem.deleteMany({})
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+// kennels.deleteMany({ breed: "Labrador" }, function(err, result) {
+//   if (err) {
+//     res.send(err);
+//   } else {
+//     res.send(result);
+//   }
+// });

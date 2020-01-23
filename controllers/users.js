@@ -99,24 +99,24 @@ exports.addNewUser = (req, res, next) => {
     });
 };
 
-exports.getCart = (req, res, next) => {
-  Cart.find()
-    .populate('userId')
-    .then(cart => {
-      console.log(cart);
-      res.send(cart);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
+// exports.getCart = (req, res, next) => {
+//   Cart.find()
+//     .populate('userId')
+//     .then(cart => {
+//       console.log(cart);
+//       res.send(cart);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// };
 
 exports.login = (req, res, next) => {
   console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ email: email }, (err, user) => {
+  User.findOne({ email: email }).exec(function(err, user) {
     if (err) {
       console.log(err);
     } else {
@@ -125,16 +125,21 @@ exports.login = (req, res, next) => {
       } else if (user.password !== password) {
         res.status(401).send('Password incorrect');
       } else {
-        const payload = {
-          f_name: user.f_name,
-          l_name: user.l_name,
-          city: user.city,
-          street: user.street,
-          role: user.role,
-          userId: user._id
-        };
-        const token = jwt.sign(payload, 'thisIsTheSecretKey');
-        res.status(200).json({ token });
+        console.log(user);
+        Cart.findOne({ userId: user._id }, function(err, resad) {
+          console.log(resad);
+          const payload = {
+            f_name: user.f_name,
+            l_name: user.l_name,
+            city: user.city,
+            street: user.street,
+            role: user.role,
+            userId: user._id,
+            cartId: resad._id
+          };
+          const token = jwt.sign(payload, 'thisIsTheSecretKey');
+          res.status(200).json({ token });
+        });
 
         // res.status(200).send(user);
       }
